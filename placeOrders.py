@@ -1,8 +1,14 @@
+import sys
+#This will only work for windows and default install PATH, update as needed if moving to linux server
+sys.path.insert(1, 'C:\TWS API\source\pythonclient')
+
 from ibapi.client import EClient
 from ibapi.wrapper import EWrapper
 from ibapi.contract import Contract
 from ibapi.order import *
 from threading import Timer
+
+
 
 class TestApp(EWrapper, EClient):
     def __init__(self):
