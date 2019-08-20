@@ -1,1 +1,9 @@
 credentials.txt
+tags
+__pycache__/*
+log/*
+*.log
+log.*
+core
+*.xml
+

@@ -1,4 +1,5 @@
 import sys
+
 #This will only work for windows and default install PATH, update as needed if moving to linux server
 sys.path.insert(1, 'C:\TWS API\source\pythonclient')
 
@@ -7,6 +8,52 @@ from ibapi.wrapper import EWrapper
 from ibapi.contract import Contract
 from ibapi.order import *
 from threading import Timer
+
+
+def SetupLogger():
+    if not os.path.exists("log"):
+        os.makedirs("log")
+
+    time.strftime("pyibapi.%Y%m%d_%H%M%S.log")
+
+    recfmt = '(%(threadName)s) %(asctime)s.%(msecs)03d %(levelname)s %(filename)s:%(lineno)d %(message)s'
+
+    timefmt = '%y%m%d_%H:%M:%S'
+
+    # logging.basicConfig( level=logging.DEBUG,
+    #                    format=recfmt, datefmt=timefmt)
+    logging.basicConfig(filename=time.strftime("log/pyibapi.%y%m%d_%H%M%S.log"),
+                        filemode="w",
+                        level=logging.INFO,
+                        format=recfmt, datefmt=timefmt)
+    logger = logging.getLogger()
+    console = logging.StreamHandler()
+    console.setLevel(logging.ERROR)
+    logger.addHandler(console)
+
+
+def printWhenExecuting(fn):
+    def fn2(self):
+        print("   doing", fn.__name__)
+        fn(self)
+        print("   done w/", fn.__name__)
+
+    return fn2
+
+def printinstance(inst:Object):
+    attrs = vars(inst)
+    print(', '.join("%s: %s" % item for item in attrs.items()))
+
+
+
+
+
+
+
+
+
+
+
 
 
 
